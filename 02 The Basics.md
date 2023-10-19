@@ -214,3 +214,9 @@ Using inline styles:
   styles: [`h3 { color: blue; }`]
 })
 ```
+
+```plantuml
+@startuml
+Alice -> Bob: Test
+@enduml
+```
