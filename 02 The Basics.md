@@ -215,8 +215,228 @@ Using inline styles:
 })
 ```
 
-```plantuml
-@startuml
-Alice -> Bob: Test
-@enduml
+
+
+## Angular Components & Selectors
+
+### Components:
+- **Template**: The view (e.g., `templateUrl: './app.component.html'`)
+- **Styles**: CSS (e.g., `styleUrls: ['./app.component.css']`)
+- **Selector**: How Angular identifies the component in the template.
+
+### Selector Types with Examples:
+
+1. **Element Selector**:
+   - Defined as: `'app-servers'`
+   - Used in HTML as: 
+     ```html
+     <app-servers></app-servers>
+     ```
+
+2. **Attribute Selector**:
+   - Defined as: `'[app-servers]'`
+   - Used in HTML as: 
+     ```html
+     <div app-servers></div>
+     ```
+
+3. **Class Selector**:
+   - Defined as: `'.app-servers'`
+   - Used in HTML as: 
+     ```html
+     <div class="app-servers"></div>
+     ```
+
+### Notes:
+- **Unique Selectors**: Avoid overwriting existing components/elements.
+- **Unsupported**: Angular doesn't support ID or pseudo selectors (e.g., `:hover`).
+- **Common Usage**: For components, the element selector style (`app-servers`) is most typical.
+
+
+
+## Angular Data Binding Reference
+
+### Overview:
+- Components in Angular serve as base building blocks.
+- To make applications dynamic beyond static content, **Data Binding** is used.
+- Data binding bridges communication between a component's TypeScript logic and its HTML template.
+
+### Types of Data Binding:
+
+1. **String Interpolation**:
+   - Output data from TypeScript in the template.
+   - Syntax: `{{ propertyNameOrExpression }}`.
+   - Example:
+     ```typescript
+     title = 'Hello World';
+     ```
+     In HTML:
+     ```html
+     <h1>{{ title }}</h1> <!-- Outputs: Hello World -->
+     ```
+
+2. **Property Binding**:
+   - Dynamically update HTML properties using TypeScript values.
+   - Syntax: `[property]="value"`.
+   - Example:
+     ```typescript
+     myLink = 'https://www.example.com';
+     ```
+     In HTML:
+     ```html
+     <a [href]="myLink">Visit Example</a>
+     ```
+
+3. **Event Binding**:
+   - React to user events and execute TypeScript logic.
+   - Syntax: `(event)="method()"`.
+   - Example:
+     ```typescript
+     onClick() {
+       alert('Button clicked!');
+     }
+     ```
+     In HTML:
+     ```html
+     <button (click)="onClick()">Click Me</button>
+     ```
+
+4. **Two-Way Data Binding**:
+   - Bidirectional link between the component logic and displayed content.
+   - Requires `FormsModule` and uses `[(ngModel)]`.
+   - Example:
+     ```typescript
+     userInput = '';
+     ```
+     In HTML:
+     ```html
+     <input [(ngModel)]="userInput">
+     <p>You entered: {{ userInput }}</p>
+     ```
+
+### Key Takeaways:
+- Data binding enables interaction and dynamic display in Angular applications.
+- Each form provides specific ways to manage the relationship between the logic and the template.
+
+
+
+## Angular String Interpolation Reference
+
+### Overview:
+- **String Interpolation** allows you to insert dynamic data into your template.
+- It uses double curly braces `{{ }}` as its syntax.
+
+### Key Features:
+- You can embed TypeScript expressions within `{{ }}`.
+- The expressions should eventually resolve to a string or a type that can be easily converted to a string.
+
+### Examples:
+
+1. **Property Output**:
+   
+   In TypeScript:
+   ```typescript
+   serverId: number = 10;
+   serverStatus: string = 'offline';
+   ```
+
+   In HTML:
+   ```html
+   <p>Server with ID {{ serverId }} is {{ serverStatus }}</p>
+   ```
+
+   Output:
+   ```plaintext
+   Server with ID 10 is offline
+   ```
+
+2. **Calling Methods**:
+
+   In TypeScript:
+   ```typescript
+   serverStatus: string = 'offline';
+
+   getServerStatus() {
+       return this.serverStatus;
+   }
+   ```
+
+   In HTML:
+   ```html
+   <p>Server is {{ getServerStatus() }}</p>
+   ```
+
+   Output:
+   ```plaintext
+   Server is offline
+   ```
+
+### Notes:
+- Despite `serverId` being a number, it's successfully used with string interpolation because numbers can be auto-converted to strings.
+- Besides properties, functions can also be called inside the interpolation braces.
+- Multiline expressions or block expressions (like `if` or `for`) are not allowed inside string interpolation. Ternary expressions are allowd.
+
+
+
+
+Certainly!
+
+### Property Binding in Angular:
+
+Property binding is a one-way data binding technique in Angular where data from a component's class is bound to a property of a DOM element or Angular component.
+
+**Syntax**: `[property]="data"`
+
+Using your code:
+
+**servers.component.html**:
+```html
+<button class="btn btn-primary" [disabled]="!allowNewServer">Add Server</button>
 ```
+The `disabled` property of the button is bound to the negated value of `allowNewServer`. When `allowNewServer` is `false`, the button is disabled.
+
+**servers.component.ts**:
+```typescript
+export class ServersComponent {
+  allowNewServer = false;
+
+  constructor() {
+    setTimeout(()=> {
+      this.allowNewServer = true;
+    }, 2000);
+  }
+}
+```
+Here, `allowNewServer` is initially `false`, so the button starts as disabled. After 2 seconds, it becomes `true`, enabling the button due to property binding. 
+
+### Conclusion:
+Property binding automatically updates the view when the component's data changes, ensuring a dynamic and responsive UI.
+
+
+
+## Git Reference: Property Binding vs. String Interpolation in Angular
+
+### Definitions:
+- **Property Binding**: Binds component's property to a DOM element's property: `[property]="componentProperty"`.
+- **String Interpolation**: Outputs data from the component directly into the template: `{{ data }}`.
+
+### Examples:
+1. **String Interpolation**:
+   ```html
+   {{ allowNewServer }}
+   ```
+   Displays value of `allowNewServer`.
+
+2. **Property Binding**:
+   ```html
+   <span [innerText]="allowNewServer"></span>
+   ```
+   Sets inner content of `<span>` to the value of `allowNewServer`.
+
+### Key Points:
+- Use string interpolation for displaying data.
+- Use property binding to set DOM properties.
+- Don't mix the two: Avoid `[property]="{{ componentProperty }}"`.
+
+### Next Steps:
+Learn about handling user events in Angular for interactivity.
