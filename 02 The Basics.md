@@ -438,5 +438,151 @@ Property binding automatically updates the view when the component's data change
 - Use property binding to set DOM properties.
 - Don't mix the two: Avoid `[property]="{{ componentProperty }}"`.
 
-### Next Steps:
-Learn about handling user events in Angular for interactivity.
+
+
+
+
+# Git Personal Reference - Angular Event Binding
+
+## Overview
+Event binding in Angular allows reacting to user events such as clicks. 
+
+## Basic Syntax
+- **Event Binding**: `(eventName)="expression"`
+
+## Example
+
+React when a button is clicked:
+
+1. **HTML Template**:
+```html
+<button (click)="onCreateServer()">Create Server</button>
+<p>{{ serverCreationStatus }}</p>
+```
+
+2. **Component TypeScript**:
+```typescript
+export class AppComponent {
+    serverCreationStatus = 'No server was created';
+
+    onCreateServer() {
+        this.serverCreationStatus = 'Server was created'; 
+    }
+}
+```
+
+### Explanation
+- `(click)` binds to the button's click event. It triggers the `onCreateServer` method when clicked.
+- `serverCreationStatus` updates when the button is clicked, displaying a new message.
+
+## Additional Points
+- Method naming with "on" (like `onCreateServer`) is a convention to indicate it's triggered from a template.
+- Bind to any available HTML event by using the event name in the binding: `(click)`, `(mouseenter)`, etc.
+- It's cleaner to call a method from the component rather than place inline code in the event binding.
+
+## Key Takeaways
+- Use parentheses `()` for event binding.
+- Specify the method or code to execute inside double quotes.
+- Utilize component methods for better separation of logic.
+
+
+
+# Git Personal Reference - Angular Event Binding and Two-way Data Binding
+
+## Overview
+Angular offers robust event binding to capture user interactions and two-way data binding for syncing the view with the component's state.
+
+## Event Binding
+- It lets you bind to DOM events like `click` or `input`.
+- Use the `(eventName)="expression"` syntax.
+
+### Accessing Event Data
+- `$event` is a reserved word in Angular templates that refers to the emitted event data.
+- For input elements, `$event.target.value` can be used to capture the typed value.
+
+#### Example:
+
+```html
+<!-- Event binding on input -->
+<input (input)="onUpdateServerName($event)" class="form-control">
+<!-- Displaying server name -->
+<p>{{ serverName }}</p>
+```
+
+```typescript
+export class AppComponent {
+    serverName = '';
+
+    onUpdateServerName(event: Event) {
+        // Type casting for TypeScript to recognize .value property
+        this.serverName = (<HTMLInputElement>event.target).value;
+    }
+}
+```
+
+## Two-way Data Binding
+Two-way data binding allows for dynamic updates between the view and the component state. 
+
+- Use `[(ngModel)]="propertyName"`. Note: Ensure you've imported `FormsModule` from `@angular/forms`.
+
+### Example:
+
+Instead of manually capturing the value as shown above, you can use:
+
+```html
+<input [(ngModel)]="serverName" class="form-control">
+```
+
+Now, `serverName` will be automatically updated with any changes in the input value and vice versa.
+
+## Key Takeaways:
+- Use `(eventName)` for event binding.
+- `$event` lets you access event data.
+- Two-way data binding provides a seamless sync between the view and component's state.
+
+
+
+
+# Git Personal Reference - Angular Two-Way Binding
+
+## Overview
+Two-way binding in Angular combines both property and event binding, allowing automatic synchronization between the view and the component's state.
+
+## FormsModule Requirement
+For two-way binding to work:
+1. `FormsModule` must be imported.
+2. Add `FormsModule` to the `imports[]` array in the `AppModule`.
+
+**Example**:
+```typescript
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  ...
+  imports: [FormsModule],
+  ...
+})
+```
+
+## Two-Way Binding Syntax
+Use a combination of square brackets `[]` and parentheses `()` with the `ngModel` directive.
+
+```html
+<input [(ngModel)]="serverName">
+```
+
+### Behavior:
+- If the value of `serverName` changes in the component, it will update in the input view.
+- If the input value changes, it will update the value of `serverName` in the component.
+
+### Illustration:
+1. If `serverName` is initially set to "test server" in the component, the input will be pre-populated with "test server".
+2. Typing into the input will update the `serverName` property in real-time.
+
+## Key Takeaways:
+- Two-way binding offers bidirectional data sync.
+- Use the `[(ngModel)]` syntax for two-way binding.
+- Ensure `FormsModule` is imported for it to work.
+- It simplifies the code by eliminating the need for manual event listeners to update component properties.
+
+
