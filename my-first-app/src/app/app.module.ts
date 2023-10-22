@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ServerComponent } from './server/server.component';
 import { ServersComponent } from './servers/servers.component';
 import { FormsModule } from '@angular/forms';
+import { UsernameComponent } from './02_assigment_practicing_databainding/username/username.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     ServerComponent,
     ServersComponent,
+    UsernameComponent,
   ],
   imports: [
     BrowserModule,
