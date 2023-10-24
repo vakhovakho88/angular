@@ -7,8 +7,7 @@ import { Component } from '@angular/core';
 })
 export class UsernameComponent {
   userName = '';
-  isEmpty = true;
-
+  
   onClearNameClick() {
     this.userName = '';
   }

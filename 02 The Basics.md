@@ -586,3 +586,268 @@ Use a combination of square brackets `[]` and parentheses `()` with the `ngModel
 - It simplifies the code by eliminating the need for manual event listeners to update component properties.
 
 
+
+Apologies for the oversight. Let's refine the summary to focus solely on directives.
+
+---
+
+**Git Reference: Understanding Angular Directives**
+
+---
+
+**1. What are Directives?**
+- Instructions in the DOM.
+- Components are a type of directive, but with templates.
+
+---
+
+**2. Components as Directives:**
+- When a component selector is placed in templates, it instructs Angular to add the content of that component at that location.
+
+   **Example**: 
+   ``` 
+   <app-component></app-component> 
+   ```
+   Here, the `app-component` selector directs Angular to inject the associated component's content.
+
+---
+
+**3. Custom Directives:**
+- These can change appearance or behavior of an element.
+  
+   **Example**: 
+   ``` 
+   <p appTurnGreen></p> 
+   ```
+   The `appTurnGreen` directive might turn the text green.
+
+---
+
+**4. Directive Selectors:**
+- Typically, directives use the attribute style, but you can also use CSS classes or element styles.
+
+   **Example**: 
+   ```typescript
+   @Directive({ 
+      selector: '[appTurnGreen]' 
+   })
+   ```
+
+---
+
+**5. Difference between Components & Directives:**
+- Components have templates; some directives don't. Components are essentially directives with a view.
+
+---
+
+**6. Built-in Directives:**
+- Angular has ready-to-use directives like `*ngFor` and `*ngIf`.
+
+
+
+
+
+---
+
+**Git Reference: Understanding Angular's *ngIf Directive**
+
+---
+
+**1. Basics of Directives:**
+- In Angular, directives guide the framework on how to process elements in the DOM.
+- Components are essentially directives paired with a template.
+
+---
+
+**2. *ngIf Directive Explained:**
+- Angular provides built-in directives for common tasks.
+- The `*ngIf` directive allows for conditional rendering based on a given expression.
+
+---
+
+**3. Structural Directives:**
+- Directives that manipulate the structure of the DOM are labeled as structural directives.
+- `*ngIf` is a structural directive. This is why it's prefixed with an asterisk (*).
+
+---
+
+**4. Practical Use of *ngIf:**
+- Suppose you want to conditionally display a "Loading..." message while fetching data.
+
+   **Example in TypeScript**: 
+   ```typescript
+   isLoading = true;
+
+   fetchData() {
+      // After fetching the data:
+      this.isLoading = false;
+   }
+   ```
+
+   **Example in Template**:
+   ``` 
+   <p *ngIf="isLoading">Loading...</p> 
+   ```
+
+   Here, the "Loading..." message will be shown only while `isLoading` is true. Once data is fetched and `isLoading` becomes false, the message will disappear.
+
+---
+
+**5. DOM Manipulation with *ngIf:**
+- Elements impacted by `*ngIf` aren't merely hidden; they're genuinely added or removed from the DOM based on the directive's condition. 
+
+
+
+**Git Reference: Angular's *ngIf with Else Condition**
+
+---
+
+**1. Basics of *ngIf:**
+- The `*ngIf` directive provides conditional rendering in Angular templates.
+- Commonly used syntax only checks the "if" condition.
+
+---
+
+**2. Extending *ngIf with Else:**
+- Beyond the basic "if" condition, `*ngIf` can also handle an "else" condition.
+- This is useful for situations where you have two potential outputs based on a condition.
+
+---
+
+**3. Implementation Using `<ng-template>`:**
+- The `<ng-template>` is a directive provided by Angular to define a block of content without rendering it immediately.
+- Combine this with a local reference to mark specific spots in the DOM.
+
+   **Example**:
+   ```html
+   <p *ngIf="serverCreated; else noServer">Server was created!</p>
+
+   <ng-template #noServer>
+      <p>No server was created.</p>
+   </ng-template>
+   ```
+
+---
+
+**4. Local Reference Concept:**
+- Denoted by a `#` (hash). Think of it as a marker or placeholder.
+- In the above example, `#noServer` is a local reference.
+
+---
+
+**5. How It Works:**
+- If `serverCreated` is true, "Server was created!" is displayed.
+- If false, the content inside the `<ng-template>` with the local reference `noServer` is shown, i.e., "No server was created."
+
+---
+
+**6. Alternatives:**
+- While the `else` addition is concise, another approach is to use `*ngIf` with a reversed condition (e.g., `!serverCreated`).
+
+---
+
+**Note**: The *ngIf-else provides a clean and readable way to handle two potential outcomes in a template. While the primary use case for *ngIf remains the simple "if" check, it's beneficial to know this alternative syntax for more complex scenarios.
+
+Remember to refer back to this reference for a concise understanding of *ngIf with "else" in Angular!
+
+
+**Git Reference: Understanding Angular's `ngStyle` Directive**
+
+---
+
+**1. Directive Categories:**
+- Angular has two main types of directives:
+  - **Structural Directives**: Modify the structure of the DOM. E.g., `*ngIf`
+  - **Attribute Directives**: Appear as attributes and change the appearance/behavior of an element. E.g., `ngStyle`
+
+---
+
+**2. Using `ngStyle`:**
+- The `ngStyle` directive allows dynamic updates to the styles of an element.
+- It's an attribute directive and looks like a typical HTML attribute.
+
+---
+
+**3. Binding with `ngStyle`:**
+- It uses property binding to be configured. 
+- Bind to a JavaScript object where the keys are style names and the values are the desired styles.
+
+   **Example**:
+   ```html
+   <p [ngStyle]="{backgroundColor: getColor()}">Server Status</p>
+   ```
+
+---
+
+**4. Dynamic Styling with Functions:**
+- Inside the component, you can use functions to return dynamic styles based on conditions.
+
+   **Example in TypeScript**:
+   ```typescript
+   serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
+
+   getColor() {
+      return this.serverStatus === 'online' ? 'green' : 'red';
+   }
+   ```
+
+   Here, the `getColor` function returns 'green' if the server is online and 'red' otherwise. This determines the background color of the paragraph.
+
+---
+
+**5. Key Points on `ngStyle`:**
+- It's not static. The styles can update in real-time based on the bound data.
+- While the directive's name is `ngStyle`, the **square brackets indicate property binding**, which is a distinct concept from the directive itself.
+
+---
+
+
+
+**Git Reference: Angular's `ngClass` Directive**
+
+---
+
+**1. Introduction to `ngClass`:**
+- Just as `ngStyle` allows dynamic assignment of styles, `ngClass` facilitates the dynamic addition or removal of CSS classes.
+
+---
+
+**2. Basic Usage:**
+- `ngClass` operates via property binding, so we use square brackets.
+- It expects a JavaScript object where the keys are the CSS class names and the values are boolean expressions indicating whether the class should be applied.
+
+---
+
+**3. Practical Example:**
+
+   **CSS**:
+   ```css
+   .online {
+      color: white;
+   }
+   ```
+
+   **HTML**:
+   ```html
+   <p [ngClass]="{'online': isServerOnline()}">Server Status</p>
+   ```
+
+   **TypeScript**:
+   ```typescript
+   serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
+
+   isServerOnline() {
+      return this.serverStatus === 'online';
+   }
+   ```
+
+   In this example, the `online` class will only be added to the paragraph if the `isServerOnline` method returns true.
+
+---
+
+**4. Key Takeaways:**
+- `ngClass` offers a clean way to conditionally toggle CSS classes.
+- The directive dynamically adds/removes classes based on conditions, ensuring the view stays updated.
+- It's an attribute directive, and, like `ngStyle`, it uses property binding.
+
+---
