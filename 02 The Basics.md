@@ -851,3 +851,43 @@ Remember to refer back to this reference for a concise understanding of *ngIf wi
 - It's an attribute directive, and, like `ngStyle`, it uses property binding.
 
 ---
+
+
+
+Certainly! I'll distill the above transcript into a concise git reference with emphasis on the key points and examples.
+
+---
+
+**Git Reference: Angular Directives and Dynamic Components**
+
+**1. Introduction:**
+
+- Angular has various built-in directives that modify the structure and behavior of the DOM.
+- One such important directive is `ngFor`, which is used to dynamically create and manage lists.
+
+**2. Dynamic Component Creation with `ngFor`:**
+
+- You can dynamically add components based on an array of data.
+- Example:
+    ```typescript
+    // servers.component.ts
+    servers = ['Testserver', 'Testserver 2'];
+    ```
+
+    In the HTML:
+    ```html
+    <app-server *ngFor="let server of servers"></app-server>
+    ```
+
+    - Here, `servers` is an array in the component, and for every server in this array, a new `<app-server>` component will be created.
+    - The `let server of servers` is analogous to JavaScript's `for...of` loop, where `server` is a temporary variable representing each item in the `servers` array.
+
+**3. Dynamic List Growth:**
+
+- The list can grow dynamically. For instance, when a new server is added, the `ngFor` directive will automatically create a new instance of the specified component.
+  
+    - If you push another server to the `servers` array, another component gets rendered:
+    ```typescript
+    servers.push('Another Server');
+    ```
+
