@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 export class DisplayDetailsComponent {
   paragraphVisible = true;
 
+  clicksList = [];
+
+  onButtonClick(){
+    // this.clicksList.push(this.clicksList.length+1);
+    this.clicksList.push(new Date());
+  }
 }
