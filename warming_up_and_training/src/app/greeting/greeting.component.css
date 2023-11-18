@@ -1,0 +1,20 @@
+/* Styling for the GreetingComponent */
+
+/* Style the container element */
+.container {
+    background-color: #f4f4f4; /* Set background color */
+    border: 2px solid #ddd; /* Add a 2px solid border */
+    text-align: center; /* Center-align text */
+    border-radius: 8px; /* Apply rounded corners */
+    /* Define the box shadow (Horizontal offset, Vertical offset, Blur radius, Spread radius, Shadow color) */
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.9);
+  }
+  
+  /* Style the message text */
+  .message {
+    font-size: 24px; /* Set font size to 24px */
+    color: #333; /* Set text color */
+    margin: 0; /* Remove margin */
+    padding: 10px; /* Add padding around the text */
+  }
+  
