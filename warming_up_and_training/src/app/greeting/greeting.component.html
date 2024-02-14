@@ -2,4 +2,14 @@
 <div class="container">
     <!-- Display a greeting message inside a container -->
     <p class="message">Hello, Angular Learner!</p>
+      <!-- Input field for name -->
+      <input type="text" [(ngModel)]="name" placeholder="Enter your name" [ngStyle]="{backgroundColor: getColor()}">
+
+      <!-- Button to trigger the greeting -->
+      <button (click)="showGreeting()" >OK</button>
+
+      <!-- Label to display the greeting -->
+      <label *ngIf="greeting">{{ greeting }}</label>
+
+    
   </div>

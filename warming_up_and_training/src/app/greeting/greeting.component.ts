@@ -10,4 +10,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./greeting.component.css'],
 })
 // Define the GreetingComponent class
-export class GreetingComponent {}
+export class GreetingComponent {
+  name = ''; // This will hold the value entered in the input field
+  greeting = ''; // This will hold the greeting message
+
+  // This method will be called when the button is clicked
+  showGreeting() {
+    this.greeting = `Hello, ${this.name}!`;
+  }
+
+  fieldIsempty = true;
+  getColor() {
+    return this.fieldIsempty ? 'red' : 'green';
+  }
+
+}
