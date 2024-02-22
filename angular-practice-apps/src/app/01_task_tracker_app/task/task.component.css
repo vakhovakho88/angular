@@ -1,0 +1,24 @@
+.task-item {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #e0f7fa; /* Light blue background */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.task-item:hover {
+    background-color: #b2ebf2; /* Darker blue background on hover */
+}
+
+.task-detail {
+    margin-right: 10px;
+    color: #006064; /* Dark blue text */
+}
+
+.task-item input[type="checkbox"] {
+    margin-right: 5px;
+    color: #9e9e9e; /* Light gray checkbox */
+}

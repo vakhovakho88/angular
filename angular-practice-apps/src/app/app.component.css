@@ -1,0 +1,7 @@
+.page-title {
+    color: #3f51b5; /* Dark blue text */
+    text-align: center; /* Center the text */
+    font-size: 2.5em; /* Make the text larger */
+    font-weight: bold; /* Make the text bold */
+    margin-top: 20px; /* Add some space at the top */
+}
