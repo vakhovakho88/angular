@@ -257,3 +257,148 @@ export class CockpitComponent {
 - [Understanding `@Input()` and `@Output()`](https://angular.io/guide/inputs-outputs)
 
 This documentation consolidates the key concepts from the video series into a structured and accessible format, providing clear explanations, code examples, and practical insights into Angular's component communication mechanisms.
+
+
+
+# 02.03.2024
+To demonstrate the use of `@Input()` and `@Output()` decorators in Angular, let's create three simple examples. These decorators enable component interaction in Angular applications, with `@Input()` allowing a parent component to pass data to a child component, and `@Output()` enabling a child component to send events back up to its parent.
+
+### Example 1: Passing Data with `@Input()`
+
+**Parent Component:**
+
+- File: `app.component.ts`
+- Purpose: Displays a message using a child component.
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `<h1>Welcome to Angular</h1>
+             <app-display-message [message]="parentMessage"></app-display-message>`,
+})
+export class AppComponent {
+  parentMessage = 'Hello from Parent!';
+}
+```
+
+**Child Component (Displaying a Message):**
+
+- File: `display-message.component.ts`
+- Purpose: Displays a message passed from the parent component.
+
+```typescript
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-display-message',
+  template: `<p>{{ message }}</p>`,
+})
+export class DisplayMessageComponent {
+  @Input() message: string;
+}
+```
+
+### Example 2: Sending Data to Parent with `@Output()`
+
+**Child Component (Button Click):**
+
+- File: `button-click.component.ts`
+- Purpose: Emits an event when a button is clicked.
+
+```typescript
+import { Component, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-button-click',
+  template: `<button (click)="sendEvent()">Click Me</button>`,
+})
+export class ButtonClickComponent {
+  @Output() buttonClicked: EventEmitter<string> = new EventEmitter();
+
+  sendEvent(): void {
+    this.buttonClicked.emit('Button clicked!');
+  }
+}
+```
+
+**Parent Component:**
+
+- File: `app.component.ts`
+- Purpose: Handles the event emitted by the child component.
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `<app-button-click (buttonClicked)="handleEvent($event)"></app-button-click>`,
+})
+export class AppComponent {
+  handleEvent(message: string) {
+    console.log(message);
+  }
+}
+```
+
+### Example 3: Combining `@Input()` and `@Output()` for Two-Way Data Binding
+
+**Child Component (Increment and Decrement):**
+
+- File: `counter.component.ts`
+- Purpose: Allows incrementing and decrementing a value.
+
+```typescript
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-counter',
+  template: `
+    <div>
+      <button (click)="decrement()">-</button>
+      {{ count }}
+      <button (click)="increment()">+</button>
+    </div>
+  `,
+})
+export class CounterComponent {
+  @Input() count: number = 0;
+  @Output() countChanged: EventEmitter<number> = new EventEmitter();
+
+  increment() {
+    this.updateCount(1);
+  }
+
+  decrement() {
+    this.updateCount(-1);
+  }
+
+  private updateCount(delta: number) {
+    this.count += delta;
+    this.countChanged.emit(this.count);
+  }
+}
+```
+
+**Parent Component:**
+
+- File: `app.component.ts`
+- Purpose: Uses the counter component and reacts to changes.
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <app-counter [count]="value" (countChanged)="value=$event"></app-counter>
+    <p>Current count: {{ value }}</p>
+  `,
+})
+export class AppComponent {
+  value = 0;
+}
+```
+
+These examples cover basic to intermediate use cases of `@Input()` and `@Output()`, showcasing how components can communicate in Angular applications.
