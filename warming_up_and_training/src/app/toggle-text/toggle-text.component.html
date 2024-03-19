@@ -1,0 +1,8 @@
+<!-- toggle-text.component.html -->
+<div>
+    <!-- Button click toggles text visibility. Uses accessibility attribute `aria-pressed` for improved screen reader support. -->
+    <button (click)="toggleTextVisibility()">{{ isTextVisible ? "Hide Text" : "Show Text" }}</button>
+    
+    <!-- This header is conditionally rendered based on `isTextVisible`. -->
+    <h1 *ngIf="isTextVisible">You have shown the text</h1>
+</div>

@@ -4,11 +4,15 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { GreetingComponent } from './greeting/greeting.component';
+import { GreetingByTimeComponent } from './greeting-by-time/greeting-by-time.component';
+import { ToggleTextComponent } from './toggle-text/toggle-text.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GreetingComponent
+    GreetingComponent,
+    GreetingByTimeComponent,
+    ToggleTextComponent,
   ],
   imports: [
     BrowserModule,
