@@ -1,4 +1,3 @@
-applications.
 # Angular Git Documentation: Components and Data Binding
 
 ## Table of Contents
