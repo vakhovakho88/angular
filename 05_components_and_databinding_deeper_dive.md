@@ -1,4 +1,4 @@
-# Angular Git Documentation: Components and Data Binding
+# Angular Git Documentation: Components and Data Binding (Project: cmp-databinding-01)
 
 ## Table of Contents
 1. [Module Introduction](#module-introduction)

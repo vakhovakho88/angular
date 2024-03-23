@@ -7,3 +7,7 @@ Practice app -> 01_task_tracker_app
     only started
 
 
+Lectures:
+watch again: 71. Binding to Custom Events
+Practice Project.
+
